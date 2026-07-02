@@ -8,54 +8,37 @@ A robust, production-ready Machine Learning pipeline built in Python to predict 
 
 The flow chart below illustrates the structural sequence of data transformation through the pipeline. Data moves continuously from raw file ingestion down into an evaluated, formatted Kaggle submission vector.
 
-```text
-                  +-----------------------------------+
+```mermaid
+graph TD
+    classDef phase fill:#f9f9f9,stroke:#333,stroke-width:2px,font-family:monospace;
+    classDef step fill:#fff,stroke:#666,stroke-width:1px,stroke-dasharray: 5 5;
 
-                  |   PHASE 1: Data Acquisition       |
-                  |   - Validation: os.path.exists()  |
-                  |   - Load: train.csv & test.csv    |
-                  +-----------------+-----------------+
-                                    |
-                                    v
-                  +-----------------------------------+
+    %% Phase 1
+    P1[<b>PHASE 1: Data Acquisition</b>]:::phase
+    S1[Validation: os.path.exists<br>Load: train.csv & test.csv]:::step
+    P1 --> S1
 
-                  |   PHASE 2: NLP Feature Eng.       |
-                  |   - Fillna: Empty Missing Strings |
-                  |   - Matrix: TfidfVectorizer       |
-                  +-----------------+-----------------+
-                                    |
-                                    v
-                  +-----------------------------------+
+    %% Phase 2
+    S1 --> P2[<b>PHASE 2: NLP Feature Eng.</b>]:::phase
+    P2 --> S2[Fillna: Empty Missing Strings<br>Matrix: TfidfVectorizer]:::step
 
-                  |   PHASE 3: Cross-Validation       |
-                  |   - Stratified Split (80/20)      |
-                  |   - Overfitting Prevention        |
-                  +-----------------+-----------------+
-                                    |
-                                    v
-                  +-----------------------------------+
+    %% Phase 3
+    S2 --> P3[<b>PHASE 3: Cross-Validation</b>]:::phase
+    P3 --> S3[Stratified Split 80/20<br>Overfitting Prevention]:::step
 
-                  |   PHASE 4: Model Training         |
-                  |   - Engine: Logistic Regression   |
-                  |   - Benchmarking: Convergence Sec|
-                  +-----------------+-----------------+
-                                    |
-                                    v
-                  +-----------------------------------+
+    %% Phase 4
+    S3 --> P4[<b>PHASE 4: Model Training</b>]:::phase
+    P4 --> S4[Engine: Logistic Regression<br>Benchmarking: Convergence Time]:::step
 
-                  |   PHASE 5: Evaluation Matrix      |
-                  |   - Metric: F1-Score & Precision  |
-                  |   - Tool: classification_report   |
-                  +-----------------+-----------------+
-                                    |
-                                    v
-                  +-----------------------------------+
+    %% Phase 5
+    S4 --> P5[<b>PHASE 5: Evaluation Matrix</b>]:::phase
+    P5 --> S5[Metric: F1-Score & Precision<br>Tool: classification_report]:::step
 
-                  |   PHASE 6: Compilation & Export   |
-                  |   - Format: id, target            |
-                  |   - File: submission.csv          |
-                  +-----------------------------------+
+    %% Phase 6
+    S5 --> P6[<b>PHASE 6: Compilation & Export</b>]:::phase
+    P6 --> S6[Format: id, target<br>File: submission.csv]:::step
 ```
+
 
 ---
 
