@@ -1,0 +1,11 @@
+# Ignore Kaggle data directories
+data/
+*.csv
+
+# Ignore local output targets
+submission.csv
+
+# Ignore Python runtime structures
+__pycache__/
+*.pyc
+.vscode/
